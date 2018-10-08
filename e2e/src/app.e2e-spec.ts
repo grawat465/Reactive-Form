@@ -9,6 +9,14 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to responsive!');
+    expect(page.getParagraphText()).toContain('Anna');
+   expect("we are learning angular").toContain("angular");
+  
   });
-});
+  it('should display paragraph message', () => {
+    page.navigateTo();
+    expect(page.getmytext()).toContain('to');
+  });
+  
+}
+);

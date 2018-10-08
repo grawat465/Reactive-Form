@@ -1,27 +1,59 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async ,ComponentFixture} from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
+  let comp:AppComponent;
+let fixture:ComponentFixture<AppComponent>;
+
+  beforeEach(() => {
+   TestBed.configureTestingModule({
+     declarations: [
         AppComponent
       ],
-    }).compileComponents();
-  }));
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'responsive'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('responsive');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to responsive!');
-  }));
+      imports:[FormsModule, ReactiveFormsModule],
+      providers:[ AppComponent]
+    });
+
+  fixture=TestBed.createComponent(AppComponent);
+  comp=fixture.componentInstance;
+});
+  it( 'is the app defined',() => {
+  
+    expect(comp).toBeDefined();
+  });
+  
+  it( 'is the form valid when empty',() => {
+    
+    expect(comp.registrationForm.valid).toBeFalsy();
+  });
+
+  it( 'is the username when empty',() => {
+    let username=comp.registrationForm.controls['userName'];
+    username.setValue("Govind");
+    expect(username.valid).toBeTruthy();
+     });
+
+     it( 'is the passowrd when empty',() => {
+      let pwd=comp.registrationForm.controls['password'];
+      pwd.setValue("Captain123!");
+      expect(pwd.valid).toBeTruthy();
+       });
+
+       it( 'is the Confirm  passowrd when empty',() => {
+        let cpwd=comp.registrationForm.controls['Cpassword'];
+        cpwd.setValue("Captain1234!");
+        expect(cpwd).toBeTruthy();
+         });
+
+         it( 'is the street when empty',() => {
+          let addy=comp.registrationForm.controls['address'];
+          addy.setValue(
+            {city:"Leasvegas", 
+            pincode:1234567,
+            street:"Secondbakerss"
+            
+            });
+          expect(addy.valid).toBeTruthy();
+           });
+  
 });
